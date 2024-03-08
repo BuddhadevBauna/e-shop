@@ -1,0 +1,59 @@
+.navabar-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 4rem;
+    background-color: blue;
+}
+.main-container {
+    margin-left: 2rem;
+}
+.logo {
+    color: white;
+    cursor: pointer;
+}
+.search-container {
+    display: flex;
+    width: 50%;
+}
+.search-container input{
+    padding: 0.7rem;
+    width: 100%;
+    font-size: 1rem;
+    border-radius: 0.5rem 0 0 0.5rem;
+    border: none;
+    border-right: solid;
+}
+.search-container button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4rem;
+    border-radius: 0 0.5rem 0.5rem 0;
+    border: none;
+    cursor: pointer;
+}
+.search-container button i{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.6rem;
+}
+.list-item-container {
+    list-style-type: none;
+    display: flex;
+    gap: 1rem;
+    margin-right: 2rem;
+}
+.list-item {
+    display: flex;
+    gap: 0.2rem;
+    cursor: pointer;
+    color: white;
+}
+.list-item i {
+    font-size: 1.3rem;
+}
+.list-item p {
+    font-size: 1.1rem;
+}
