@@ -12,11 +12,15 @@ import {
 
 const Navbar = () => {
     const[isSearchContainerVisible, setSearchContainerVisible] = useState(false);
-    const handleSearchContainer = () => {
+    const toggleSearchContainer = () => {
         setSearchContainerVisible(!isSearchContainerVisible);
     }
     const collapseNavbar = () => {
         setSearchContainerVisible(!isSearchContainerVisible);
+    }
+    const[isListchContainerVisible, setListContainerVisible] = useState(false);
+    const toggleListContainer = () => {
+        setListContainerVisible(!isListchContainerVisible);
     }
 
     return (
@@ -25,7 +29,7 @@ const Navbar = () => {
         >
             <div className="main-container">
                 <div className="sidebar-container">
-                    <i className="sidebar-icon-sm">
+                    <i className="sidebar-icon-sm" onClick={toggleListContainer}>
                         <FaBars />
                     </i>
                     <h1 className="logo">
@@ -33,7 +37,7 @@ const Navbar = () => {
                     </h1>
                 </div>
                 <div className="search-and-account-sm">
-                    <button className="search-btn" onClick={handleSearchContainer}>
+                    <button className="search-btn" onClick={toggleSearchContainer}>
                         <i className="search-icon">
                             <FaSearch />
                         </i>
@@ -62,7 +66,9 @@ const Navbar = () => {
                 </i>
             </div>
             <ul 
-                className={`list-item-container ${isSearchContainerVisible ? "list-item-container-sm" : ""}`}
+                className={`list-item-container 
+                ${isSearchContainerVisible ? "list-item-container-sm" : ""}
+                ${isListchContainerVisible ? "list-active" : ""}`}
             >
                 <li className="list-item">
                     <i>

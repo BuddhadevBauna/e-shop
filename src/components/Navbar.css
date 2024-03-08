@@ -94,7 +94,7 @@
     .sidebar-container {
         display: flex;
         align-items: center;
-        gap: 2rem;
+        gap: 0.5rem;
         margin-left: 0;
     }
     .sidebar-icon-sm {
@@ -116,11 +116,12 @@
     .search-and-account-sm {
         display: flex;
         align-items: center;
-        gap: 1rem;
+        gap: 0.5rem;
     }
     .search-and-account-sm .list-item {
         font-size: 1.3rem;
         color: white;
+        padding-left: 0;
     }
     .search-and-account-sm .search-btn {
         width: 2rem;
@@ -148,17 +149,31 @@
     .list-item-container {
         flex-direction: column;
         position: absolute;
+        background-color: black;
         top: 3rem;
         left: 0;
         height: calc(100vh - 3rem);
-        background-color: aqua;
+        width: 16rem;
+        max-width: 16rem;
+        margin-right: 0;
+        display: none;
     }
     .list-item-container-sm {
         top: 6rem;
         height: calc(100vh - 6rem);
     }
+    .list-active {
+        display: flex;
+    }
+    .list-item-container .list-item:first-child {
+        background-color: blueviolet;
+        padding: 0.4rem 1rem;
+        margin: 0.3rem;
+        margin-bottom: 0;
+        border-radius: 0.4rem;
+    }
     .list-item {
-        color: initial;
+        padding-left: 1rem;
     }
     .search-container {
         display: none;
@@ -184,4 +199,5 @@
         color: black;
         font-size: 1.4rem;
     }
+    
 }
