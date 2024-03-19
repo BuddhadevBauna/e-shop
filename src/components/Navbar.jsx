@@ -9,22 +9,23 @@ import {
     FaProductHunt,
     FaSearch,
 } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
-    const[isSearchContainerVisible, setSearchContainerVisible] = useState(false);
+    const [isSearchContainerVisible, setSearchContainerVisible] = useState(false);
     const toggleSearchContainer = () => {
         setSearchContainerVisible(!isSearchContainerVisible);
     }
     const collapseNavbar = () => {
         setSearchContainerVisible(!isSearchContainerVisible);
     }
-    const[isListchContainerVisible, setListContainerVisible] = useState(false);
+    const [isListchContainerVisible, setListContainerVisible] = useState(false);
     const toggleListContainer = () => {
         setListContainerVisible(!isListchContainerVisible);
     }
 
     return (
-        <div 
+        <div
             className={`navabar-container ${isSearchContainerVisible ? "navbar-container-sm" : ""}`}
         >
             <div className="main-container">
@@ -42,15 +43,13 @@ const Navbar = () => {
                             <FaSearch />
                         </i>
                     </button>
-                    <li className="list-item">
-                        <i>
-                            <MdAccountCircle />
-                        </i>
+                    <Link className="nav-link" to="/login">
+                        <i><MdAccountCircle /></i>
                         <p>Account</p>
-                    </li>
+                    </Link>
                 </div>
             </div>
-            <div 
+            <div
                 className={`search-container ${isSearchContainerVisible ? "search-active" : ""}`}
             >
                 <div className="search-box-and-submit-btn">
@@ -65,28 +64,28 @@ const Navbar = () => {
                     <FaArrowUp />
                 </i>
             </div>
-            <ul 
+            <ul
                 className={`list-item-container 
                 ${isSearchContainerVisible ? "list-item-container-sm" : ""}
                 ${isListchContainerVisible ? "list-active" : ""}`}
             >
                 <li className="list-item">
-                    <i>
-                        <MdAccountCircle />
-                    </i>
-                    <p>Account</p>
+                    <Link className="nav-link" to="/login">
+                        <i><MdAccountCircle /></i>
+                        <p>Account</p>
+                    </Link>
                 </li>
                 <li className="list-item">
-                    <i>
-                        <FaProductHunt />
-                    </i>
-                    <p>Product</p>
+                    <Link className="nav-link" to="/products">
+                        <i><FaProductHunt /></i>
+                        <p>Product</p>
+                    </Link>
                 </li>
                 <li className="list-item">
-                    <i>
-                        <FaCartArrowDown />
-                    </i>
-                    <p>Cart</p>
+                    <Link className="nav-link" to="/cart">
+                        <i><FaCartArrowDown /></i>
+                        <p>Cart</p>
+                    </Link>
                 </li>
             </ul>
         </div>
