@@ -1,8 +1,9 @@
 import React from "react";
+import AllProduct from "../components/Products/AllProduct"
 
 const Products = () => {
     return(
-        <h1>Products Page</h1>
+        <AllProduct />
     )
 }
 export default Products;
