@@ -4,7 +4,7 @@ import "./AllProductDetailsPage.css"
 
 const AllProductDetailsPage = () => {
     const products = useSelector(state => state.allProduct.products);
-    console.log(products);
+    // console.log(products);
 
     if (!products) {
         return <div>Loading...</div>;
