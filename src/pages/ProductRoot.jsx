@@ -7,9 +7,7 @@ const ProductRoot = () => {
     return (
         <div className="container">
             <AllCategories />
-            <div className="grid-container">
-                <Outlet />
-            </div>
+            <Outlet />
         </div>
     );
 }

@@ -7,7 +7,7 @@ import axios from "axios";
 
 const AllCategories = () => {
   const categories = useSelector((state) => state.allCategory);
-  console.log(categories);
+  // console.log(categories);
 
   const dispatch = useDispatch();
   useEffect(() => {
