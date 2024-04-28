@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const productsCategorySlice = createSlice(
+const productsOfCategorySlice = createSlice(
     {
         name : "products of category",
         initialState : {},
@@ -8,10 +8,13 @@ const productsCategorySlice = createSlice(
             setProductsOfCategory(state, action) {
                 // console.log(action.payload);
                 return {...state, ...action.payload};
+            },
+            removeProductOfCategory() {
+                return {};
             }
         }
     }
 )
 
-export const { setProductsOfCategory } = productsCategorySlice.actions
-export default productsCategorySlice.reducer
+export const { setProductsOfCategory, removeProductOfCategory } = productsOfCategorySlice.actions
+export default productsOfCategorySlice.reducer

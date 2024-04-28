@@ -1,7 +1,7 @@
 import React from "react";
 import "./ProductRoot.css";
 import { Outlet } from "react-router-dom";
-import AllCategories from "../components/Products/allCategories/AllCategories";
+import AllCategories from "../../components/Products/allCategories/AllCategories";
 
 const ProductRoot = () => {
     return (

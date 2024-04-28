@@ -2,10 +2,10 @@ import React, { useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom"
 import { useDispatch } from "react-redux";
-import { setProductsOfCategory } from "../../../redux/reducers/productsCategorySlice";
+import { setProductsOfCategory } from "../../../redux/reducers/productsOfCategorySlice";
 import ProductsView from "../productView/ProductsView";
 
-const ProductCategoryView = () => {
+const ProductsOfCategory = () => {
     const { particularCategory } = useParams();
     // console.log(particularCategory);
 
@@ -33,4 +33,4 @@ const ProductCategoryView = () => {
     );
 }
 
-export default ProductCategoryView;
+export default ProductsOfCategory;

@@ -1,11 +1,11 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const productSlice = createSlice(
+const allProductSlice = createSlice(
     {
         name : 'products',
         initialState : {},
         reducers : {
-            setProducts(state, action) {
+            setAllProducts(state, action) {
                 return {...state, ...action.payload};
             }
         }
@@ -14,5 +14,5 @@ const productSlice = createSlice(
 )
 
 // Action creators are generated for each case reducer function
-export const { setProducts } = productSlice.actions
-export default productSlice.reducer
+export const { setAllProducts } = allProductSlice.actions
+export default allProductSlice.reducer

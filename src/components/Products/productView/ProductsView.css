@@ -1,6 +1,7 @@
 .grid-container {
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    align-content: start;
     gap: 1rem;
     width: 85%;
 }
@@ -49,10 +50,10 @@
 }
 .product-body div {
     display: flex;
+    align-items: center;
     justify-content: space-between;
 }
 .product-category {
-    font-size: 1rem;
     color: gray;
     font-weight:  bold;
 }
