@@ -38,7 +38,7 @@ const AllCategories = () => {
 
   return (
     <div className="flex-container">
-      <h1>Category</h1>
+      <Link to={'/products'}>All</Link>
       { renderCategories }
     </div>
   );

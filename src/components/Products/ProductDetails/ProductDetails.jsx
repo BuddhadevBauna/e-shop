@@ -7,7 +7,7 @@ import { setProductDetails } from "../../../redux/reducers/productDetailsSlice";
 
 const ProductDetails = () => {
     const product = useSelector((state) => state.productDetails);
-    // console.log(product);
+    console.log(product);
 
     const { productId } = useParams();
     // console.log(productId);
@@ -27,14 +27,14 @@ const ProductDetails = () => {
         fetchProductDetails();
     })
 
-    const renderItem = () => {
-        let {} = product;
-        return (
-            <div>
+    // const renderItem = () => {
+    //     let {} = product;
+    //     return (
+    //         <div>
 
-            </div>
-        );
-    }
+    //         </div>
+    //     );
+    // }
 
     return (
         <h1>Hello</h1>
