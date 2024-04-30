@@ -15,6 +15,7 @@
 }
 .filter-container .filter {
     display: flex;
+    justify-content: space-between;
     gap: 2rem;
 }
 .filter p:last-child {

@@ -90,7 +90,7 @@ const ProductsOfCategory = () => {
 
         return () => {
             document.removeEventListener("click", handleClickOutside);
-            document.addEventListener("scroll", handleScroll);
+            document.removeEventListener("scroll", handleScroll);
         };
     }, []);
 
@@ -142,11 +142,55 @@ const ProductsOfCategory = () => {
         }
     }
 
+    const [filters, setFilters] = useState({
+        brand: [],
+        rating: [],
+        price: []
+    })
+    const handleBrandFilters = (brand, isChecked) => {
+        // console.log(isChecked);
+        setFilters(prevFilters => {
+            //If the brand is already in filters, that's mean user click for removing the filters
+            if(filters.brand.includes(brand)) {
+                return {
+                    ...prevFilters,
+                    brand: prevFilters.brand.filter(item => item !== brand)
+                }
+            } else {
+                //If the brand is not in filters, that's mean user click for adding the filters
+                return {
+                    ...prevFilters,
+                    brand: [...prevFilters.brand, brand]
+                }
+            }
+        })
+    }
+    const handleRatingFilters = (rating, isChecked) => {
+        // console.log(isChecked);
+        setFilters((prevFilters) => {
+            if(filters.rating.includes(rating)) {
+                return {
+                    ...prevFilters,
+                    rating: prevFilters.rating.filter(item => item !== rating)
+                }
+            } else {
+                return {
+                    ...prevFilters,
+                    rating: [...prevFilters.rating, rating]
+                }
+            }
+        })
+    }
 
     if (!products) {
         return <div>Loading...</div>
     }
-    const renderList = products.map((product, index) => {
+    const filterProducts = products.filter(product => {
+        return filters.brand.length === 0 || filters.brand.includes(product.brand)
+        // filters.rating.length === 0 || filters.rating.includes()
+        ;
+    })
+    const renderList = filterProducts.map((product) => {
         let { id, title, images, rating, description, price, discountPercentage, stock } = product;
         let MRP = price / (1 - (discountPercentage / 100));
         let MRPInt = Math.round(MRP);
@@ -212,9 +256,13 @@ const ProductsOfCategory = () => {
                                     {
                                         uniqeBrands.map(brand => {
                                             return (
-                                                <li>
+                                                <li key={brand}>
                                                     <span>
-                                                        <input type="checkbox"></input> 
+                                                        <input 
+                                                            type="checkbox"
+                                                            checked={filters.brand.includes(brand)}
+                                                            onChange={(e) => handleBrandFilters(brand, e.target.checked)}
+                                                        />
                                                         <menu>{brand}</menu>
                                                     </span>
                                                 </li>
@@ -237,8 +285,26 @@ const ProductsOfCategory = () => {
                             <div className="inner-div">
                                 <p>RATING</p>
                                 <ul>
-                                    <li><span><input type="checkbox"></input> <menu>4★ & above</menu></span></li>
-                                    <li><span><input type="checkbox"></input> <menu>4.5★ & above</menu></span></li>
+                                    <li>
+                                        <span>
+                                            <input 
+                                                type="checkbox"
+                                                checked={filters.rating.includes(4)}
+                                                onChange={(e) => handleRatingFilters(4, e.target.checked)}
+                                            />
+                                            <menu>4★ & above</menu>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <input 
+                                                type="checkbox"
+                                                checked={filters.rating.includes(4.5)}
+                                                onChange={(e) => handleRatingFilters(4.5, e.target.checked)}
+                                            />
+                                            <menu>4.5★ & above</menu>
+                                        </span>
+                                    </li>
                                 </ul>
                                 <hr></hr>
                                 <div className="filter-sm">
@@ -255,10 +321,42 @@ const ProductsOfCategory = () => {
                             <div className="inner-div">
                                 <p>PRICE</p>
                                 <ul>
-                                    <li><span><input type="checkbox"></input> <menu>500 & bellow</menu></span></li>
-                                    <li><span><input type="checkbox"></input> <menu>1000 & bellow</menu></span></li>
-                                    <li><span><input type="checkbox"></input> <menu>1500 & bellow</menu></span></li>
-                                    <li><span><input type="checkbox"></input> <menu>1500 & above</menu></span></li>
+                                    <li>
+                                        <span>
+                                            <input 
+                                                type="checkbox"
+                                                // checked={filte}
+                                            /> 
+                                            <menu>500 & bellow</menu>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <input 
+                                                type="checkbox"
+                                                // checked={filte}
+                                            />
+                                            <menu>1000 & bellow</menu>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <input 
+                                                type="checkbox"
+                                                // checked={filte}
+                                            />
+                                            <menu>1500 & bellow</menu>
+                                        </span>
+                                    </li>
+                                    <li>
+                                        <span>
+                                            <input 
+                                                type="checkbox"
+                                                    // checked={filte}
+                                            />
+                                            <menu>1500 & above</menu>
+                                        </span>
+                                    </li>
                                 </ul>
                                 <hr></hr>
                                 <div className="filter-sm">
