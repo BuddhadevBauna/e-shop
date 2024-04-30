@@ -23,7 +23,7 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
-.product-container {
+.grid-container .product-container {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
@@ -32,7 +32,7 @@
     border-radius: 8px;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
-.product-img {
+.grid-container .product-img {
     display: block;
     width: 65%;
     height: auto;

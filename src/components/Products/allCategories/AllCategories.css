@@ -2,7 +2,8 @@
     display: flex;
     gap: 1.5rem;
     overflow-x: scroll;
-    padding: 0 1.5rem 0.5rem;
+    padding: 0.5rem 1.5rem;
+    background: #fff;
 }
 .flex-container h1 {
     font-size: 1rem;
@@ -21,7 +22,7 @@
 }
 
 .flex-container::-webkit-scrollbar-track {
-    background-color: #f1f1f1; /* Color of the scrollbar track */
+    background: rgb(255, 0, 234); /* Color of the scrollbar track */
 }
 
 .flex-container::-webkit-scrollbar-thumb {
