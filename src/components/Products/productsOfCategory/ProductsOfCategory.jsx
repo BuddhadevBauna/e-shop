@@ -142,12 +142,13 @@ const ProductsOfCategory = () => {
         }
     }
 
+    
+    //Apply filter
     const [filters, setFilters] = useState({
         brand: [],
         rating: [],
         price: []
     })
-    const [isFilter, setFilter] = useState(false);
     const handleBrandFilters = (brand) => {
         setFilters(prevFilters => {
             //If the brand is already in filters, that's mean user click for removing the filters
@@ -164,11 +165,6 @@ const ProductsOfCategory = () => {
                 }
             }
         })
-        if(filters.brand.includes(brand)) {
-            setFilter(false);
-        } else {
-            setFilter(true);
-        }
     }
     const handleRatingFilters = (rating) => {
         setFilters((prevFilters) => {
@@ -184,11 +180,7 @@ const ProductsOfCategory = () => {
                 }
             }
         })
-        if(filters.rating.includes(rating)) {
-            setFilter(false);
-        } else {
-            setFilter(true);
-        }
+        
     }
     const handlePriceFiltes = (price) => {
         setFilters((prevFilters) => {
@@ -204,13 +196,20 @@ const ProductsOfCategory = () => {
                 }
             }
         })
-        if(filters.price.includes(price)) {
-            setFilter(false);
-        } else {
-            setFilter(true);
-        }
+        
     }
+
+    //Clear All button visible or not for large screen
+    const [isFilter, setFilter] = useState(false);
+    useEffect(() => {
+        if(filters.brand.length !== 0 || filters.rating.length !== 0 || filters.price.length !== 0) {
+            setFilter(true);
+        } else {
+            setFilter(false);
+        }
+    }, [filters])
     const handaleClearFilters = () => {
+        //Clear all filter for large screen
         setFilters(() => {
             return {
                 brand: [],
@@ -218,7 +217,12 @@ const ProductsOfCategory = () => {
                 price: []
             };
         })
+        //After removing all filters remove the clear all button
         setFilter(false);
+    }
+
+    const clearBrandFilter = () => {
+
     }
 
     if (!products) {
@@ -343,7 +347,7 @@ const ProductsOfCategory = () => {
                                 <hr></hr>
                                 <div className="filter-sm">
                                     <p>Clear Filtes</p>
-                                    <p>Show Results</p>
+                                    <p onClick={() => clearBrandFilter()}>Show Results</p>
                                 </div>
                                 <hr></hr>
                             </div>
