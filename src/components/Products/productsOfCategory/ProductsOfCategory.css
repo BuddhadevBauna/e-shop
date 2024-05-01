@@ -155,16 +155,15 @@
     .filter-container .filter {
         display: initial;
     }
-    .filter p {
-        border: none !important;
-        color: black;
-       font-weight: bold !important;
-    }
-    .filter p:last-child {
-        display: none;
+    .filter p.heading {
+        border: none;
+        font-weight: bold;
         font-size: 0.9rem;
         color: blue;
         cursor: pointer;
+    }
+    .filter p.clear-all {
+        display: none;
     }
     .filter-container p {
         border: 0.5px solid #BBBFBF;
@@ -207,6 +206,9 @@
     .filter-container .filter-sm {
         display: flex;
         justify-content: space-between;
+    }
+    .filter-container .filter-sm-row-reverse {
+        flex-direction: row-reverse;
     }
     .filter-sm p {
         border: 0.5px solid #BBBFBF !important;
