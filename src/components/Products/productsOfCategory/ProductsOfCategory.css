@@ -12,13 +12,18 @@
     padding: 1rem;
     background: #fff;
     box-shadow: 0 1px 8px 0 rgba(0, 0, 0, .06);
+    width: 10rem;
 }
 .filter-container .filter {
     display: flex;
     justify-content: space-between;
     gap: 2rem;
 }
-.filter p:last-child {
+.filter .heading {
+    color: blueviolet;
+    text-transform: uppercase;
+}
+.filter .clear-all {
     font-size: 0.9rem;
     color: blue;
     cursor: pointer;
@@ -136,6 +141,7 @@
         border-left: 0;
         border-right: 0;
         overflow-x: auto;
+        width: initial;
     }
     .product-category-container .category > p,
     .product-category-container .brand > p,

@@ -147,14 +147,14 @@ const ProductsOfCategory = () => {
         rating: [],
         price: []
     })
-    const handleBrandFilters = (brand, isChecked) => {
-        // console.log(isChecked);
+    const [isFilter, setFilter] = useState(false);
+    const handleBrandFilters = (brand) => {
         setFilters(prevFilters => {
             //If the brand is already in filters, that's mean user click for removing the filters
-            if(filters.brand.includes(brand)) {
+            if(prevFilters.brand.includes(brand)) {
                 return {
                     ...prevFilters,
-                    brand: prevFilters.brand.filter(item => item !== brand)
+                    brand: prevFilters.brand.filter(brandName => brandName !== brand)
                 }
             } else {
                 //If the brand is not in filters, that's mean user click for adding the filters
@@ -164,14 +164,18 @@ const ProductsOfCategory = () => {
                 }
             }
         })
+        if(filters.brand.includes(brand)) {
+            setFilter(false);
+        } else {
+            setFilter(true);
+        }
     }
-    const handleRatingFilters = (rating, isChecked) => {
-        // console.log(isChecked);
+    const handleRatingFilters = (rating) => {
         setFilters((prevFilters) => {
-            if(filters.rating.includes(rating)) {
+            if(prevFilters.rating.includes(rating)) {
                 return {
                     ...prevFilters,
-                    rating: prevFilters.rating.filter(item => item !== rating)
+                    rating: prevFilters.rating.filter(ratingValue => ratingValue !== rating)
                 }
             } else {
                 return {
@@ -180,15 +184,75 @@ const ProductsOfCategory = () => {
                 }
             }
         })
+        if(filters.rating.includes(rating)) {
+            setFilter(false);
+        } else {
+            setFilter(true);
+        }
+    }
+    const handlePriceFiltes = (price) => {
+        setFilters((prevFilters) => {
+            if(prevFilters.price.includes(price)) {
+                return {
+                    ...prevFilters,
+                    price: prevFilters.price.filter(priceValue => priceValue !== price)
+                }
+            } else {
+                return {
+                    ...prevFilters,
+                    price: [...prevFilters.price, price]
+                }
+            }
+        })
+        if(filters.price.includes(price)) {
+            setFilter(false);
+        } else {
+            setFilter(true);
+        }
+    }
+    const handaleClearFilters = () => {
+        setFilters(() => {
+            return {
+                brand: [],
+                rating: [],
+                price: []
+            };
+        })
+        setFilter(false);
     }
 
     if (!products) {
         return <div>Loading...</div>
     }
     const filterProducts = products.filter(product => {
-        return filters.brand.length === 0 || filters.brand.includes(product.brand)
-        // filters.rating.length === 0 || filters.rating.includes()
-        ;
+        //If product brand is selected in filter or no brand is selected
+        const brandFilterPass = filters.brand.length === 0 || filters.brand.includes(product.brand);
+
+        //If product rating is selected in filter or no rating is selected
+        const validateRating =  filters.rating.some(pRating => {
+            return product.rating >= pRating;
+        })
+        const ratingFilterPass = filters.rating.length === 0 || validateRating;
+
+        //If product price is selected in filter or no price is selected
+        // const validatePrice = filters.price.includes(499) ? 
+        // (product.price >= 0 && product.price <= 500) : 
+        // filters.price.some(pPrice => product.price >= pPrice);
+        //or------>
+        const validatePrice = filters.price.some(pPrice => {
+            if(pPrice === 499) {
+                if(product.price >= 0 && product.price <= 500) {
+                    return true;
+                }
+            } 
+            else {
+                return product.price >= pPrice;
+            }
+            return false;
+        })
+        const priceFilterPass = filters.price.length === 0 || validatePrice;
+
+        return brandFilterPass && ratingFilterPass && priceFilterPass;
     })
     const renderList = filterProducts.map((product) => {
         let { id, title, images, rating, description, price, discountPercentage, stock } = product;
@@ -233,8 +297,15 @@ const ProductsOfCategory = () => {
             <div>
                 <div className="filter-container" ref={filterContainerRef}>
                     <div className="filter">
-                        <p>Filters</p>
-                        <p>Clear All</p>
+                        <p className="heading">Filtes</p>
+                        { isFilter && 
+                            <p 
+                                className="clear-all"
+                                onClick={() => handaleClearFilters()}
+                            >   
+                                Clear All
+                            </p> 
+                        }
                     </div>
                     <div className="category">
                         <p onClick={() => handleCategory()}>CATEGORY</p>
@@ -257,11 +328,10 @@ const ProductsOfCategory = () => {
                                         uniqeBrands.map(brand => {
                                             return (
                                                 <li key={brand}>
-                                                    <span>
+                                                    <span onClick={(e) => handleBrandFilters(brand)}>
                                                         <input 
                                                             type="checkbox"
                                                             checked={filters.brand.includes(brand)}
-                                                            onChange={(e) => handleBrandFilters(brand, e.target.checked)}
                                                         />
                                                         <menu>{brand}</menu>
                                                     </span>
@@ -286,21 +356,19 @@ const ProductsOfCategory = () => {
                                 <p>RATING</p>
                                 <ul>
                                     <li>
-                                        <span>
+                                        <span onClick={() => handleRatingFilters(4)}>
                                             <input 
                                                 type="checkbox"
                                                 checked={filters.rating.includes(4)}
-                                                onChange={(e) => handleRatingFilters(4, e.target.checked)}
                                             />
                                             <menu>4★ & above</menu>
                                         </span>
                                     </li>
                                     <li>
-                                        <span>
+                                        <span onClick={() => handleRatingFilters(4.5)}>
                                             <input 
                                                 type="checkbox"
                                                 checked={filters.rating.includes(4.5)}
-                                                onChange={(e) => handleRatingFilters(4.5, e.target.checked)}
                                             />
                                             <menu>4.5★ & above</menu>
                                         </span>
@@ -322,37 +390,38 @@ const ProductsOfCategory = () => {
                                 <p>PRICE</p>
                                 <ul>
                                     <li>
-                                        <span>
+                                        <span onClick={() => handlePriceFiltes(499)}>
                                             <input 
                                                 type="checkbox"
-                                                // checked={filte}
+                                                checked={filters.price.includes(499)}
                                             /> 
-                                            <menu>500 & bellow</menu>
+                                            <menu>0 - 500</menu>
                                         </span>
                                     </li>
                                     <li>
-                                        <span>
+                                        <span onClick={() => handlePriceFiltes(500)}>
                                             <input 
                                                 type="checkbox"
-                                                // checked={filte}
+                                                checked={filters.price.includes(500)}
+                                                
                                             />
-                                            <menu>1000 & bellow</menu>
+                                            <menu>500 & above</menu>
                                         </span>
                                     </li>
                                     <li>
-                                        <span>
+                                        <span onClick={() => handlePriceFiltes(1000)}>
                                             <input 
                                                 type="checkbox"
-                                                // checked={filte}
+                                                checked={filters.price.includes(1000)}
                                             />
-                                            <menu>1500 & bellow</menu>
+                                            <menu>1000 & above</menu>
                                         </span>
                                     </li>
                                     <li>
-                                        <span>
+                                        <span onClick={() => handlePriceFiltes(1500)}>
                                             <input 
                                                 type="checkbox"
-                                                    // checked={filte}
+                                                checked={filters.price.includes(1500)}
                                             />
                                             <menu>1500 & above</menu>
                                         </span>
