@@ -236,4 +236,8 @@
     .product-category-container hr {
         display: initial;
     }
+    .brand-sm-change {
+        background-color: whitesmoke;
+        color: blueviolet;
+    }
 }

@@ -56,21 +56,21 @@ const ProductsOfCategory = () => {
 
     const filterContainerRef = useRef(null);
     useEffect(() => {
-        const handleClickOutside = (event) => {
-            if (filterContainerRef.current && !filterContainerRef.current.contains(event.target)) {
-                if (window.innerWidth > 767) {
-                    setCategory(true);
-                    setBrand(true);
-                    setRating(true);
-                    setPrice(true);
-                } else {
-                    setCategory(false);
-                    setBrand(false);
-                    setRating(false);
-                    setPrice(false);
-                }
-            }
-        };
+        // const handleClickOutside = (event) => {
+        //     if (filterContainerRef.current && !filterContainerRef.current.contains(event.target)) {
+        //         if (window.innerWidth > 767) {
+        //             setCategory(true);
+        //             setBrand(true);
+        //             setRating(true);
+        //             setPrice(true);
+        //         } else {
+        //             setCategory(false);
+        //             setBrand(false);
+        //             setRating(false);
+        //             setPrice(false);
+        //         }
+        //     }
+        // };
         const handleScroll = () => {
             if (window.innerWidth > 767) {
                 setCategory(true);
@@ -85,11 +85,11 @@ const ProductsOfCategory = () => {
             }
         }
 
-        document.addEventListener("click", handleClickOutside);
+        // document.addEventListener("click", handleClickOutside);
         document.addEventListener("scroll", handleScroll);
 
         return () => {
-            document.removeEventListener("click", handleClickOutside);
+            // document.removeEventListener("click", handleClickOutside);
             document.removeEventListener("scroll", handleScroll);
         };
     }, []);
@@ -133,6 +133,20 @@ const ProductsOfCategory = () => {
             setCategory(false);
             setBrand(false);
             setRating(false);
+        }
+    }
+
+    const handleFilterContainer = () => {
+        if(window.innerWidth <= 767) {
+            if(isCategory) {
+                setCategory(false);
+            } else if(isBrand) {
+                setBrand(false);
+            } else if(isRating) {
+                setRating(false);
+            } else if(isPrice) {
+                setPrice(false);
+            }
         }
     }
 
@@ -375,7 +389,10 @@ const ProductsOfCategory = () => {
                         }
                     </div>
                     <div className="brand">
-                        <p onClick={() => handleBrand()}>BRAND</p>
+                        <p
+                            onClick={() => handleBrand()}
+                            className={`${filters.brand.length !== 0 ? "brand-sm-change" : ""}`}
+                        >BRAND</p>
                         {isBrand &&
                             <div className="inner-div">
                                 <p>BRAND</p>
@@ -402,14 +419,17 @@ const ProductsOfCategory = () => {
                                     { isBrandFilter &&
                                         <p onClick={() => clearBrandFilter()}>Clear Filtes</p>
                                     }
-                                    <p>Show Results</p>
+                                    <p onClick={() => handleFilterContainer()}>Show Results</p>
                                 </div>
                                 <hr></hr>
                             </div>
                         }
                     </div>
                     <div className="rating">
-                        <p onClick={() => handleRating()}>RATING</p>
+                        <p 
+                            onClick={() => handleRating()}
+                            className={`${filters.rating.length !== 0 ? "brand-sm-change" : ""}`}
+                        >RATING</p>
                         {isRating &&
                             <div className="inner-div">
                                 <p>RATING</p>
@@ -440,14 +460,17 @@ const ProductsOfCategory = () => {
                                     { isRatingFilter &&
                                         <p onClick={() => clearRatingFilter()}>Clear Filtes</p>
                                     }
-                                    <p>Show Results</p>
+                                    <p onClick={() => handleFilterContainer()}>Show Results</p>
                                 </div>
                                 <hr></hr>
                             </div>
                         }
                     </div>
                     <div className="price">
-                        <p onClick={() => handlePrice()}>PRICE</p>
+                        <p 
+                            onClick={() => handlePrice()}
+                            className={`${filters.price.length !== 0 ? "brand-sm-change" : ""}`}
+                        >PRICE</p>
                         {isPrice &&
                             <div className="inner-div">
                                 <p>PRICE</p>
@@ -498,7 +521,7 @@ const ProductsOfCategory = () => {
                                     { isPriceFilter && 
                                         <p onClick={() => clearPriceFilter()}>Clear Filtes</p>
                                     }
-                                    <p>Show Results</p>
+                                    <p onClick={() => handleFilterContainer()}>Show Results</p>
                                 </div>
                                 <hr></hr>
                             </div>
@@ -506,7 +529,7 @@ const ProductsOfCategory = () => {
                     </div>
                 </div>
             </div>
-            <div className="product-container">
+            <div className="product-container" onClick={() => handleFilterContainer()}>
                 {renderList}
             </div>
         </div>
