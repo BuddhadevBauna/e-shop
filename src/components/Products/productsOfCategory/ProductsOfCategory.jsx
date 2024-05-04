@@ -137,14 +137,14 @@ const ProductsOfCategory = () => {
     }
 
     const handleFilterContainer = () => {
-        if(window.innerWidth <= 767) {
-            if(isCategory) {
+        if (window.innerWidth <= 767) {
+            if (isCategory) {
                 setCategory(false);
-            } else if(isBrand) {
+            } else if (isBrand) {
                 setBrand(false);
-            } else if(isRating) {
+            } else if (isRating) {
                 setRating(false);
-            } else if(isPrice) {
+            } else if (isPrice) {
                 setPrice(false);
             }
         }
@@ -166,7 +166,7 @@ const ProductsOfCategory = () => {
     const handleBrandFilters = (brand) => {
         setFilters(prevFilters => {
             //If the brand is already in filters, that's mean user click for removing the filters
-            if(prevFilters.brand.includes(brand)) {
+            if (prevFilters.brand.includes(brand)) {
                 return {
                     ...prevFilters,
                     brand: prevFilters.brand.filter(brandName => brandName !== brand)
@@ -182,7 +182,7 @@ const ProductsOfCategory = () => {
     }
     const handleRatingFilters = (rating) => {
         setFilters((prevFilters) => {
-            if(prevFilters.rating.includes(rating)) {
+            if (prevFilters.rating.includes(rating)) {
                 return {
                     ...prevFilters,
                     rating: prevFilters.rating.filter(ratingValue => ratingValue !== rating)
@@ -194,11 +194,11 @@ const ProductsOfCategory = () => {
                 }
             }
         })
-        
+
     }
     const handlePriceFiltes = (price) => {
         setFilters((prevFilters) => {
-            if(prevFilters.price.includes(price)) {
+            if (prevFilters.price.includes(price)) {
                 return {
                     ...prevFilters,
                     price: prevFilters.price.filter(priceValue => priceValue !== price)
@@ -210,13 +210,13 @@ const ProductsOfCategory = () => {
                 }
             }
         })
-        
+
     }
 
     //Clear All button visible or not for large screen
     const [isFilter, setFilter] = useState(false);
     useEffect(() => {
-        if(filters.brand.length !== 0 || filters.rating.length !== 0 || filters.price.length !== 0) {
+        if (filters.brand.length !== 0 || filters.rating.length !== 0 || filters.price.length !== 0) {
             setFilter(true);
         } else {
             setFilter(false);
@@ -243,17 +243,17 @@ const ProductsOfCategory = () => {
     //Clear Filter button visible or not for small screen in price section
     const [isPriceFilter, setPriceFilter] = useState(false);
     useEffect(() => {
-        if(filters.brand.length !== 0) {
+        if (filters.brand.length !== 0) {
             setBrandFilter(true);
         } else {
             setBrandFilter(false);
         }
-        if(filters.rating.length !== 0) {
+        if (filters.rating.length !== 0) {
             setRatingFilter(true);
         } else {
             setRatingFilter(false);
         }
-        if(filters.price.length !== 0) {
+        if (filters.price.length !== 0) {
             setPriceFilter(true);
         } else {
             setPriceFilter(false);
@@ -290,7 +290,6 @@ const ProductsOfCategory = () => {
     }
 
 
-
     if (!products) {
         return <div>Loading...</div>
     }
@@ -299,7 +298,7 @@ const ProductsOfCategory = () => {
         const brandFilterPass = filters.brand.length === 0 || filters.brand.includes(product.brand);
 
         //If product rating is selected in filter or no rating is selected
-        const validateRating =  filters.rating.some(pRating => {
+        const validateRating = filters.rating.some(pRating => {
             return product.rating >= pRating;
         })
         const ratingFilterPass = filters.rating.length === 0 || validateRating;
@@ -310,11 +309,11 @@ const ProductsOfCategory = () => {
         // filters.price.some(pPrice => product.price >= pPrice);
         //or------>
         const validatePrice = filters.price.some(pPrice => {
-            if(pPrice === 499) {
-                if(product.price >= 0 && product.price <= 500) {
+            if (pPrice === 499) {
+                if (product.price >= 0 && product.price <= 500) {
                     return true;
                 }
-            } 
+            }
             else {
                 return product.price >= pPrice;
             }
@@ -335,8 +334,10 @@ const ProductsOfCategory = () => {
                 onClick={(e) => disableLink(e)}
             >
                 <div className="product-img">
-                    <img src={images[0]} alt="product-img"></img>
-                    <i><FaRegHeart /></i>
+                    <div>
+                        <img src={images[0]} alt="product-img"></img>
+                        <i><FaRegHeart /></i>
+                    </div>
                 </div>
                 <div className="product-details">
                     <div className="product-description">
@@ -357,24 +358,24 @@ const ProductsOfCategory = () => {
 
     const uniqeBrands = [];
     products.forEach(product => {
-        if(!uniqeBrands.includes(product.brand)) {
+        if (!uniqeBrands.includes(product.brand)) {
             uniqeBrands.push(product.brand);
         }
     });
-    
+
     return (
         <div className="product-category-container">
             <div>
                 <div className="filter-container" ref={filterContainerRef}>
                     <div className="filter">
                         <p className="heading">Filtes</p>
-                        { isFilter && 
-                            <p 
+                        {isFilter &&
+                            <p
                                 className="clear-all"
                                 onClick={() => handaleClearFilters()}
-                            >   
+                            >
                                 Clear All
-                            </p> 
+                            </p>
                         }
                     </div>
                     <div className="category">
@@ -402,10 +403,10 @@ const ProductsOfCategory = () => {
                                             return (
                                                 <li key={brand}>
                                                     <span onClick={(e) => handleBrandFilters(brand)}>
-                                                        <input 
+                                                        <input
                                                             type="checkbox"
                                                             checked={filters.brand.includes(brand)}
-                                                            onChange={() => {}}
+                                                            onChange={() => { }}
                                                         />
                                                         <menu>{brand}</menu>
                                                     </span>
@@ -416,7 +417,7 @@ const ProductsOfCategory = () => {
                                 </ul>
                                 <hr></hr>
                                 <div className={`filter-sm ${!isBrandFilter ? "filter-sm-row-reverse" : ""}`}>
-                                    { isBrandFilter &&
+                                    {isBrandFilter &&
                                         <p onClick={() => clearBrandFilter()}>Clear Filtes</p>
                                     }
                                     <p onClick={() => handleFilterContainer()}>Show Results</p>
@@ -426,7 +427,7 @@ const ProductsOfCategory = () => {
                         }
                     </div>
                     <div className="rating">
-                        <p 
+                        <p
                             onClick={() => handleRating()}
                             className={`${filters.rating.length !== 0 ? "brand-sm-change" : ""}`}
                         >RATING</p>
@@ -436,20 +437,20 @@ const ProductsOfCategory = () => {
                                 <ul>
                                     <li>
                                         <span onClick={() => handleRatingFilters(4)}>
-                                            <input 
+                                            <input
                                                 type="checkbox"
                                                 checked={filters.rating.includes(4)}
-                                                onChange={() => {}}
+                                                onChange={() => { }}
                                             />
                                             <menu>4★ & above</menu>
                                         </span>
                                     </li>
                                     <li>
                                         <span onClick={() => handleRatingFilters(4.5)}>
-                                            <input 
+                                            <input
                                                 type="checkbox"
                                                 checked={filters.rating.includes(4.5)}
-                                                onChange={() => {}}
+                                                onChange={() => { }}
                                             />
                                             <menu>4.5★ & above</menu>
                                         </span>
@@ -457,7 +458,7 @@ const ProductsOfCategory = () => {
                                 </ul>
                                 <hr></hr>
                                 <div className={`filter-sm ${!isRatingFilter ? "filter-sm-row-reverse" : ""}`}>
-                                    { isRatingFilter &&
+                                    {isRatingFilter &&
                                         <p onClick={() => clearRatingFilter()}>Clear Filtes</p>
                                     }
                                     <p onClick={() => handleFilterContainer()}>Show Results</p>
@@ -467,7 +468,7 @@ const ProductsOfCategory = () => {
                         }
                     </div>
                     <div className="price">
-                        <p 
+                        <p
                             onClick={() => handlePrice()}
                             className={`${filters.price.length !== 0 ? "brand-sm-change" : ""}`}
                         >PRICE</p>
@@ -477,40 +478,40 @@ const ProductsOfCategory = () => {
                                 <ul>
                                     <li>
                                         <span onClick={() => handlePriceFiltes(499)}>
-                                            <input 
+                                            <input
                                                 type="checkbox"
                                                 checked={filters.price.includes(499)}
-                                                onChange={() => {}}
-                                            /> 
+                                                onChange={() => { }}
+                                            />
                                             <menu>0 - 500</menu>
                                         </span>
                                     </li>
                                     <li>
                                         <span onClick={() => handlePriceFiltes(500)}>
-                                            <input 
+                                            <input
                                                 type="checkbox"
                                                 checked={filters.price.includes(500)}
-                                                onChange={() => {}}
+                                                onChange={() => { }}
                                             />
                                             <menu>500 & above</menu>
                                         </span>
                                     </li>
                                     <li>
                                         <span onClick={() => handlePriceFiltes(1000)}>
-                                            <input 
+                                            <input
                                                 type="checkbox"
                                                 checked={filters.price.includes(1000)}
-                                                onChange={() => {}}
+                                                onChange={() => { }}
                                             />
                                             <menu>1000 & above</menu>
                                         </span>
                                     </li>
                                     <li>
                                         <span onClick={() => handlePriceFiltes(1500)}>
-                                            <input 
+                                            <input
                                                 type="checkbox"
                                                 checked={filters.price.includes(1500)}
-                                                onChange={() => {}}
+                                                onChange={() => { }}
                                             />
                                             <menu>1500 & above</menu>
                                         </span>
@@ -518,7 +519,7 @@ const ProductsOfCategory = () => {
                                 </ul>
                                 <hr></hr>
                                 <div className={`filter-sm ${!isPriceFilter ? "filter-sm-row-reverse" : ""}`}>
-                                    { isPriceFilter && 
+                                    {isPriceFilter &&
                                         <p onClick={() => clearPriceFilter()}>Clear Filtes</p>
                                     }
                                     <p onClick={() => handleFilterContainer()}>Show Results</p>

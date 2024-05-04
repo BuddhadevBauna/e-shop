@@ -1,0 +1,53 @@
+.produt-details-container {
+    display: flex;
+    margin: 0 2rem;
+}
+.image-container {
+    display: flex;
+    width: 40%;
+}
+.slider-container {
+    display: none;
+}
+.img-lg-container {
+    display: flex;
+    width: 100%;
+}
+.verically-img-show {
+    display: flex;
+    flex-direction: column;
+    width: 5rem;
+}
+.verically-img-show img {
+    opacity: 0.5;
+    border: solid 1.5px gray;
+    outline: solid 2.5px transparent;
+    height: calc(5rem - 3.5px); /* Set a fixed height for the images */
+    width: auto;
+}
+.verically-img-show img:hover {
+    opacity: initial;
+    border-color: blue;
+    outline-color: blue;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.lg-img-show {
+    width: calc(100% - 5rem);
+    border: solid 1.5px rgba(128, 128, 128, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.lg-img-show img {
+    padding: 0 0.2rem;
+    max-width: 95%; /* Ensure image doesn't exceed container width */
+    max-height: 95%; /* Ensure image doesn't exceed container height */
+}
+
+@media (max-width: 767px) {
+    .img-lg-container {
+        display: none;
+    }
+}
+

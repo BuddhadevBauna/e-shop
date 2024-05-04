@@ -53,7 +53,7 @@ const AllProduct = () => {
         let MRP = price / (1 - (discountPercentage / 100));
         let MRPInt = Math.round(MRP);
         return (
-            <Link to={`/products/${id}`} className="product-container" key={id} >
+            <Link to={`/products/${id}`} className="product-container" key={id}>
                 <img className="product-img" src={images[0]} alt={title} />
                 <div className="product-body">
                     <div className="product-stock">
@@ -74,10 +74,10 @@ const AllProduct = () => {
                         <small className="rating">{rating} ★</small>
                     </div>
                     <div className="product-btn">
-                        <button type="button" className="btn">Add To Cart</button>
+                        {/* <Link to={'/cart'} className="btn">Add To Cart</Link>
                         <Link to={`/products/${id}`} className="btn view-btn">
                             <i><IoEyeSharp /></i>
-                        </Link>
+                        </Link> */}
                     </div>
                 </div>
             </Link>

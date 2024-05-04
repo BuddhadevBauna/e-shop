@@ -1,0 +1,49 @@
+@media (max-width: 767px) {
+    .produt-details-container {
+        display: block;
+        margin: 0;
+    }
+    .image-container {
+        display: block;
+        width: initial;
+    }
+    .slider-container {
+        display: block;
+    }
+    
+
+    /* Adjust padding around the slider */
+    .slider {
+        padding: 0 20px;
+        /* Adjust padding as needed */
+    }
+
+    /* Adjust same bottom lavel of all images */
+    .slick-track {
+        display: flex !important;
+        /* Set display to flex */
+        align-items: flex-end;
+        /* Align items to flex-end */
+    }
+
+    /* Adjust images size */
+    .slick-slide img {
+        width: 32%;
+        height: auto;/* Maintain aspect ratio */
+    }
+
+    .slick-slide div div {
+        display: flex !important;
+        justify-content: center;
+    }
+
+    /* centering slick dots */
+    .slick-dots {
+        left: 0;
+    }
+
+    /* hidden slider arrow button */
+    .slick-arrow {
+        display: none !important;
+    }
+}
