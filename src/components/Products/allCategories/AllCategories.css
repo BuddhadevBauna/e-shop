@@ -22,7 +22,7 @@
 }
 
 .flex-container::-webkit-scrollbar-track {
-    background: rgb(255, 0, 234); /* Color of the scrollbar track */
+    background: gray; /* Color of the scrollbar track */
 }
 
 .flex-container::-webkit-scrollbar-thumb {
@@ -32,4 +32,10 @@
 
 .flex-container::-webkit-scrollbar-thumb:hover {
     background-color: #555; /* Color of the scrollbar thumb on hover */
+}
+
+@media (max-width: 767px) {
+    .flex-container {
+        padding: 0.5rem 1rem;
+    }
 }

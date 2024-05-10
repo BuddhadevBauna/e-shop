@@ -12,8 +12,8 @@ import Signup from './pages/Signup';
 import Cart from './pages/product/Cart';
 import ProductRoot from './pages/product/ProductRoot';
 import AllProduct from './components/Products/allProducts/AllProduct';
-import ProductsOfCategory from './components/Products/productsOfCategory/ProductsOfCategory';
 import ProductDetails from './components/Products/ProductDetails/ProductDetails';
+import ProductsOfCategoryContainer from './components/Products/productsOfCategory/ProductOfCategoryContainer';
 
 
 const router = createBrowserRouter([
@@ -27,7 +27,7 @@ const router = createBrowserRouter([
         path: "products", element: <ProductRoot />,
         children: [
           { path: "", element: <AllProduct /> },
-          { path: "category/:particularCategory", element: <ProductsOfCategory /> },
+          { path: "category/:particularCategory", element: <ProductsOfCategoryContainer /> },
           { path: ":productId", element: <ProductDetails /> }
         ]
       },

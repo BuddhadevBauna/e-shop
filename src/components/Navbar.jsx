@@ -25,6 +25,7 @@ const Navbar = () => {
     }
 
     return (
+        <div className="navbar">
         <div
             className={`navabar-container ${isSearchContainerVisible ? "navbar-container-sm" : ""}`}
         >
@@ -88,6 +89,7 @@ const Navbar = () => {
                     </Link>
                 </li>
             </ul>
+        </div>
         </div>
     );
 };

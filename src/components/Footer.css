@@ -1,6 +1,6 @@
 .footer-container {
-    background-color: blue;
-    color: wheat;
+    background-color: #1A4D2E;
+    color: white;
     padding: 3% 7%;
 }
 .footer-row {
@@ -28,7 +28,7 @@
 .footer-col h2,
 .footer-container h3 {
     font-size: 1.5rem;
-    color: white;
+    color: #878787;
 }
 
 .media-container form {
@@ -38,8 +38,8 @@
 }
 .form-group input {
     border: none;
-    border-bottom: solid 0.2rem wheat;
-    background: blue;
+    border-bottom: solid 0.2rem white;
+    background-color: inherit;
     width: 90%;
     padding: 0.5rem;
     color: white;
@@ -53,9 +53,9 @@
 }
 .input-group .btn {
     padding: 0.8rem 1.2rem;
-    background: blue;
-    color: wheat;
-    border: wheat solid 0.15rem;
+    background-color: inherit;
+    color: white;
+    border: white solid 0.15rem;
     border-radius: 7.5rem;
     font-size: 1rem;
     font-weight: bold;

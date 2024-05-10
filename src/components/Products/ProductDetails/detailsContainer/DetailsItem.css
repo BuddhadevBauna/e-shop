@@ -1,0 +1,118 @@
+.produt-details-container {
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 1.5rem;
+    position: relative;
+}
+.slider-container {
+    display: none;
+}
+.image-button {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    position: sticky;
+    top: 4.5rem;
+}
+.img-lg-container {
+    display: grid;
+    grid-template-columns: 5rem calc(100% - 5rem);
+    position: relative;
+}
+@media (max-width: 767px) {
+    .img-lg-container {
+        display: none;
+    }
+}
+.verically-img-show {
+    display: flex;
+    flex-direction: column;
+    width: 5rem;
+    border: solid 1.5px rgba(128, 128, 128, 0.5);
+    height: 20rem;
+    overflow: hidden;
+}
+.verically-img-show li {
+    box-sizing: border-box;
+    height: 5rem;
+    padding: 0.3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0.5;
+    border: solid 2.5px transparent;
+    outline: solid 1.5px rgba(128, 128, 128, 0.5);
+}
+.verically-img-show li:hover {
+    opacity: initial;
+    border-color: blue;
+    border-radius: 0.5rem;
+    cursor: pointer;
+}
+.verically-img-show img {
+    max-width: 100%;
+    max-height: 100%;
+}
+.scroll-buttons .scroll-btn {
+    position: absolute;
+    width: 5rem;
+    background-color: white;
+    cursor: pointer;
+}
+.scroll-btn i {
+    width: 100%;
+    font-size: 1.1rem;
+    color: black;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+}
+.scroll-btn.top {
+    top: 0;
+    border: solid 1.5px rgba(128, 128, 128, 0.5);
+}
+.scroll-btn.bottom {
+    bottom: 0;
+    border: solid 1.5px rgba(128, 128, 128, 0.5);
+}
+
+.lg-img-show {
+    height: 20rem;
+    width: 100%;
+    border: solid 1.5px rgba(128, 128, 128, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.lg-img-show img {
+    /* Ensure image doesn't exceed container width */
+    max-width: 95%;
+    /* Ensure image doesn't exceed container height */
+    max-height: 95%;
+    box-sizing: border-box;
+    padding: 0.5rem;
+}
+
+.button-container {
+    display: flex;
+    gap: 0.5rem;
+}
+.button-container .btn {
+    width: 50%;
+    padding: 0.5rem 0;
+    border: none;
+    outline: none;
+    background-color: blue;
+    color: white;
+    font-weight: 700;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+
+
+
+@media (max-width: 767px) {
+    .information-container {
+        padding: 1.5rem 0 3rem;
+    }
+}

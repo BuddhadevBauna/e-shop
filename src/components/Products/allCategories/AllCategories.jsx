@@ -26,6 +26,7 @@ const AllCategories = () => {
     fetchProductsCategory();
   }, [dispatch]);
 
+  
   const renderCategories = categories.map((category, index) => {
     return (
       <div className="category-container" key={index}>

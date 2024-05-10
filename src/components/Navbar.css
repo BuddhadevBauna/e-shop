@@ -1,4 +1,11 @@
+.navbar {
+    position: relative;
+    height: 4rem;
+}
 .navabar-container {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -102,19 +109,15 @@
     .sidebar-icon-sm {
         width: 2rem;
         height: 2rem;
+        font-size: 1.3rem;
         display: flex;
         align-items: center;
         justify-content: center;
-        border-radius: 100%;
-        font-size: 1.3rem;
         color: white;
+        border-radius: 0.3rem;
         cursor: pointer;
     }
-    .sidebar-icon-sm:hover {
-        color: black;
-        background-color: white;
-        font-size: 1.4rem;
-    }
+    
     .search-and-account-sm {
         display: flex;
         align-items: center;
@@ -142,11 +145,6 @@
     .search-btn i {
         display: flex;
         align-items: center;
-    }
-    .search-and-account-sm .search-btn:hover {
-        background-color: white;
-        color: black;
-        font-size: 1.4rem;
     }
     .list-item-container {
         flex-direction: column;
