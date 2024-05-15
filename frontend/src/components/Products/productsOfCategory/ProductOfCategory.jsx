@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import FilterSidebar from "./filter/FilterSidebar";
 import FilterProduct from "./product/FilterProduct";
 
@@ -6,8 +6,12 @@ const ProductsOfCategory = (props) => {
     const {filters, setFilters, brandFilter, setBrandFilter, ratingFilter, setRatingFilter,
         priceFilter, setPriceFilter, isCategoryContainerActive, setCategoryContainerActive, 
         isBrandContainerActive, setBrandContainerActive, isRatingContainerActive, setRatingContainerActive,
-        isPriceContainerActive, setPriceContainerActive
+        isPriceContainerActive, setPriceContainerActive, searchCategories
     } = props;
+
+    const [selectedCategory, setSelectedCategory] = useState("");
+    // console.log(selectedCategory);
+
 
     useEffect(() => {
         const handaleResize = () => {
@@ -71,6 +75,10 @@ const ProductsOfCategory = (props) => {
                 setRatingContainerActive={setRatingContainerActive}
                 isPriceContainerActive={isPriceContainerActive}
                 setPriceContainerActive={setPriceContainerActive}
+                //for search logic
+                searchCategories={searchCategories}
+                selectedCategory={selectedCategory}
+                setSelectedCategory={setSelectedCategory}
             />
             <FilterProduct 
                 filters={filters} 
@@ -82,6 +90,8 @@ const ProductsOfCategory = (props) => {
                 setRatingContainerActive={setRatingContainerActive}
                 isPriceContainerActive={isPriceContainerActive}
                 setPriceContainerActive={setPriceContainerActive}
+                //for search logic
+                selectedCategory={selectedCategory}
             />
         </div>
     );

@@ -10,6 +10,8 @@ import {
     FaSearch,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import SearchContainer from "./Products/search/SearchContainer";
+
 
 const Navbar = () => {
     const [isSearchContainerVisible, setSearchContainerVisible] = useState(false);
@@ -24,72 +26,68 @@ const Navbar = () => {
         setListContainerVisible(!isListchContainerVisible);
     }
 
+    
+
+
     return (
         <div className="navbar">
-        <div
-            className={`navabar-container ${isSearchContainerVisible ? "navbar-container-sm" : ""}`}
-        >
-            <div className="main-container">
-                <div className="sidebar-container">
-                    <i className="sidebar-icon-sm" onClick={toggleListContainer}>
-                        <FaBars />
-                    </i>
-                    <h1 className="logo">
-                        <ImAidKit />
-                    </h1>
-                </div>
-                <div className="search-and-account-sm">
-                    <button className="search-btn" onClick={toggleSearchContainer}>
-                        <i className="search-icon">
-                            <FaSearch />
-                        </i>
-                    </button>
-                    <Link className="nav-link" to="/login">
-                        <i><MdAccountCircle /></i>
-                        <p>Account</p>
-                    </Link>
-                </div>
-            </div>
             <div
-                className={`search-container ${isSearchContainerVisible ? "search-active" : ""}`}
+                className={`navabar-container ${isSearchContainerVisible ? "navbar-container-sm" : ""}`}
             >
-                <div className="search-box-and-submit-btn">
-                    <input type="text" placeholder="Search products..." />
-                    <button className="search-btn">
-                        <i className="search-icon">
-                            <FaSearch />
+                <div className="main-container">
+                    <div className="sidebar-container">
+                        <i className="sidebar-icon-sm" onClick={toggleListContainer}>
+                            <FaBars />
                         </i>
-                    </button>
+                        <h1 className="logo">
+                            <ImAidKit />
+                        </h1>
+                    </div>
+                    <div className="search-and-account-sm">
+                        <button className="search-btn" onClick={toggleSearchContainer}>
+                            <i className="search-icon">
+                                <FaSearch />
+                            </i>
+                        </button>
+                        <Link className="nav-link" to="/login">
+                            <i><MdAccountCircle /></i>
+                            <p>Account</p>
+                        </Link>
+                    </div>
                 </div>
-                <i className="collapse-icon-sm" onClick={collapseNavbar}>
-                    <FaArrowUp />
-                </i>
-            </div>
-            <ul
-                className={`list-item-container 
+                <div className={`search-container ${isSearchContainerVisible ? "search-active" : ""}`}>
+                    <div className="search-box-and-submit-btn">
+                        <SearchContainer />
+                    </div>
+                    <i className="collapse-icon-sm" onClick={collapseNavbar}>
+                        <FaArrowUp />
+                    </i>
+                </div>
+                <ul
+                    className={`list-item-container 
                 ${isSearchContainerVisible ? "list-item-container-sm" : ""}
                 ${isListchContainerVisible ? "list-active" : ""}`}
-            >
-                <li className="list-item">
-                    <Link className="nav-link" to="/login">
-                        <i><MdAccountCircle /></i>
-                        <p>Account</p>
-                    </Link>
-                </li>
-                <li className="list-item">
-                    <Link className="nav-link" to="/products">
-                        <i><FaProductHunt /></i>
-                        <p>Product</p>
-                    </Link>
-                </li>
-                <li className="list-item">
-                    <Link className="nav-link" to="/cart">
-                        <i><FaCartArrowDown /></i>
-                        <p>Cart</p>
-                    </Link>
-                </li>
-            </ul>
-        </div>
+                >
+                    <li className="list-item">
+                        <Link className="nav-link" to="/login">
+                            <i><MdAccountCircle /></i>
+                            <p>Account</p>
+                        </Link>
+                    </li>
+                    <li className="list-item">
+                        <Link className="nav-link" to="/products">
+                            <i><FaProductHunt /></i>
+                            <p>Product</p>
+                        </Link>
+                    </li>
+                    <li className="list-item">
+                        <Link className="nav-link" to="/cart">
+                            <i><FaCartArrowDown /></i>
+                            <p>Cart</p>
+                        </Link>
+                    </li>
+                </ul>
+            </div>
         </div>
     );
 };

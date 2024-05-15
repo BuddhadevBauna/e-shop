@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { removeProductDetails, setProductDetails } from "../../../redux/reducers/productDetailsSlice";
-import { removeProductOfCategory, setProductsOfCategory } from "../../../redux/reducers/productsOfCategorySlice";
+import { removeCategoryProducts, setProductsOfCategory } from "../../../redux/reducers/productsOfCategorySlice";
 import DetailsItem from "./detailsContainer/DetailsItem";
 import { SimilarProductSlider } from "./slider/Slider";
 
@@ -22,8 +22,8 @@ const ProductDetails = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         const fetchProductDetails = async () => {
-            dispatch(removeProductOfCategory());
             dispatch(removeProductDetails());
+            dispatch(removeCategoryProducts());
             try {
                 const response = await axios('https://dummyjson.com/products/' + productId);
                 // console.log(response);
@@ -44,8 +44,8 @@ const ProductDetails = () => {
                 // console.log(particularProduct.category);
                 const response = await axios(`https://dummyjson.com/products/category/${particularProduct.category}`);
                 // console.log(response);
-                // console.log(response.data);
-                dispatch(setProductsOfCategory(response.data));
+                // console.log(response.data.products);
+                dispatch(setProductsOfCategory(response.data.products));
             } catch (error) {
                 console.log(error);
             }

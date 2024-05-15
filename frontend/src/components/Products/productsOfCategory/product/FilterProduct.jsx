@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { FaRegHeart } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
@@ -6,10 +6,16 @@ import { Link } from "react-router-dom";
 const FilterProduct = (props) => {
     const { filters, isCategoryContainerActive, setCategoryContainerActive, isBrandContainerActive,
         setBrandContainerActive, isRatingContainerActive, setRatingContainerActive, isPriceContainerActive,
-        setPriceContainerActive 
+        setPriceContainerActive, selectedCategory
     } = props;
 
     const products = useSelector((state) => state.categoryProducts.products);
+
+    //for search logic
+    const searchProducts = useSelector(state => state.categoryProducts.searchProducts);
+    // console.log(searchProducts);
+    // console.log(selectedCategory);
+
 
     //for (small screen)---->
     const handleFilterContainer = () => {
@@ -34,42 +40,71 @@ const FilterProduct = (props) => {
     };
 
 
-    if (!products) {
-        return <div>Loading...</div>;
-    }
-    const filterProducts = products.filter((product) => {
-        //If product brand is selected in filter or no brand is selected
-        const brandFilterPass = filters.brand.length === 0 || filters.brand.includes(product.brand);
-
-        //If product rating is selected in filter or no rating is selected
-        const validateRating = filters.rating.some((pRating) => {
-            return product.rating >= pRating;
-        });
-        const ratingFilterPass = filters.rating.length === 0 || validateRating;
-
-        //If product price is selected in filter or no price is selected
-        //const validatePrice = filters.price.includes(499) ?
-        //(product.price >= 0 && product.price <= 500) :
-        //filters.price.some(pPrice => product.price >= pPrice);
-        //or------>
-        const validatePrice = filters.price.some((pPrice) => {
-            if (pPrice === 499) {
-                if (product.price >= 0 && product.price <= 500) {
-                    return true;
-                }
+    let [productList, setProductList] = useState([]);
+    const [loading, setLoading] = useState(false);
+    useEffect(() => {
+        setLoading(true);
+        if (products && products.length > 0) {
+            setProductList(products);
+            setLoading(false);
+        } else if (searchProducts && searchProducts.length > 0) {
+            //This for search logic
+            if (!selectedCategory) {
+                setProductList(searchProducts[0]);
             } else {
-                return product.price >= pPrice;
+                const foundProductArray = searchProducts.find(productArray => {
+                    return productArray[0].category === selectedCategory;
+                });
+                setProductList(foundProductArray);
             }
-            return false;
-        });
-        const priceFilterPass = filters.price.length === 0 || validatePrice;
+            setLoading(false);
+        }
+    }, [products, searchProducts, selectedCategory])
 
-        return brandFilterPass && ratingFilterPass && priceFilterPass;
-    });
+    let [filterProducts, setFilterProducts] = useState([]);
+    useEffect(() => {
+        if (productList.length > 0) {
+            const filteredProducts = productList.filter((product) => {
+                //If product brand is selected in filter or no brand is selected
+                const brandFilterPass = filters.brand.length === 0 || filters.brand.includes(product.brand);
+
+                //If product rating is selected in filter or no rating is selected
+                const validateRating = filters.rating.some((pRating) => {
+                    return product.rating >= pRating;
+                });
+                const ratingFilterPass = filters.rating.length === 0 || validateRating;
+
+                //If product price is selected in filter or no price is selected
+                //const validatePrice = filters.price.includes(499) ?
+                //(product.price >= 0 && product.price <= 500) :
+                //filters.price.some(pPrice => product.price >= pPrice);
+                //or------>
+                const validatePrice = filters.price.some((pPrice) => {
+                    if (pPrice === 499) {
+                        if (product.price >= 0 && product.price <= 500) {
+                            return true;
+                        }
+                    } else {
+                        return product.price >= pPrice;
+                    }
+                    return false;
+                });
+                const priceFilterPass = filters.price.length === 0 || validatePrice;
+
+                return brandFilterPass && ratingFilterPass && priceFilterPass;
+            });
+            setFilterProducts(filteredProducts);
+        }
+    }, [productList, filters])
     // console.log(filterProducts);
 
     let renderList;
-    if (filterProducts.length === 0) {
+    if (loading || !filterProducts) {
+        // Display loading message while fetching products
+        renderList = (
+            <div>Loading...</div>
+        );
+    } else if (filterProducts.length === 0) {
         renderList = (
             <div className="product-menu default-msg-container">
                 <h1 className="default-msg">No Product Found</h1>

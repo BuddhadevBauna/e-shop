@@ -1,14 +1,19 @@
 import React from "react";
-import { useParams } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link, useParams } from "react-router-dom";
 
 const CategoryController = (props) => {
     const { isCategoryContainerActive, setCategoryContainerActive, setBrandContainerActive,
-        setRatingContainerActive, setPriceContainerActive 
+        setRatingContainerActive, setPriceContainerActive, searchCategories, setSelectedCategory
     } = props;
+
+    //for search logic
+    // console.log(searchCategories);
+    const searchProducts = useSelector(state => state.categoryProducts.searchProducts);
+    // console.log(searchProducts);
 
     const { particularCategory } = useParams();
     // console.log(particularCategory);
-
 
     //for (small screen)---->
     const handleCategory = () => {
@@ -22,6 +27,13 @@ const CategoryController = (props) => {
     };
 
 
+    const handleCategoryClick = (category) => {
+        setSelectedCategory(category);
+        // Update URL with the selected category
+        window.history.pushState(null, "", `/products/category/${category}`);
+    }
+
+
     return (
         <div className="category">
             <p onClick={() => handleCategory()}>CATEGORY</p>
@@ -29,7 +41,34 @@ const CategoryController = (props) => {
                 <div className="inner-div">
                     <p>CATEGORY</p>
                     <ul>
-                        <li>{particularCategory}</li>
+                        {searchProducts ?
+                            searchProducts.map(products => {
+                                const category = products[0].category;
+                                return (
+                                    <li 
+                                        className="seacrch-category" 
+                                        key={category} 
+                                        onClick={() => handleCategoryClick(category)}
+                                    >
+                                        <span>{ category }</span>
+                                    </li>
+                                )
+                            })
+                            :
+                            (!searchCategories || searchCategories.length <= 1) ? (
+                                <li>{particularCategory}</li>
+                            ) : (
+                                searchCategories.map((category) => {
+                                    return (
+                                        <li className="seacrch-category" key={category}>
+                                            <Link to={`/products/category/${category}`}>
+                                                {category}
+                                            </Link>
+                                        </li>
+                                    );
+                                })
+                            )
+                        }
                     </ul>
                 </div>
             )}

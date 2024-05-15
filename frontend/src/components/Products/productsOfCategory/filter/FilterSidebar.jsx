@@ -4,26 +4,12 @@ import BrandController from "./filtercontrolls/BrandController";
 import RatingController from "./filtercontrolls/RatingController";
 import PriceController from "./filtercontrolls/PriceController";
 import ClearFilters from "./filtercontrolls/clearFiltes/largeScreen/ClearFilters";
-import { useSelector } from "react-redux";
 
 const FilterSidebar = (props) => {
-    const {
-        filters,
-        setFilters,
-        brandFilter,
-        setBrandFilter,
-        ratingFilter,
-        setRatingFilter,
-        priceFilter,
-        setPriceFilter,
-        isCategoryContainerActive,
-        setCategoryContainerActive,
-        isBrandContainerActive,
-        setBrandContainerActive,
-        isRatingContainerActive,
-        setRatingContainerActive,
-        isPriceContainerActive,
-        setPriceContainerActive,
+    const {filters, setFilters, brandFilter, setBrandFilter, ratingFilter, setRatingFilter, priceFilter,
+        setPriceFilter, isCategoryContainerActive, setCategoryContainerActive, isBrandContainerActive,
+        setBrandContainerActive, isRatingContainerActive, setRatingContainerActive, isPriceContainerActive,
+        setPriceContainerActive, searchCategories, selectedCategory, setSelectedCategory
     } = props;
 
     useEffect(() => {
@@ -37,6 +23,7 @@ const FilterSidebar = (props) => {
         });
     }, [brandFilter, ratingFilter, priceFilter, setFilters]);
 
+    
     return (
         <div>
             <div className="filter-container">
@@ -58,6 +45,9 @@ const FilterSidebar = (props) => {
                         setBrandContainerActive={setBrandContainerActive}
                         setRatingContainerActive={setRatingContainerActive}
                         setPriceContainerActive={setPriceContainerActive}
+                        //for search logic
+                        searchCategories={searchCategories}
+                        setSelectedCategory={setSelectedCategory}
                     />
                 </>
                 <>
@@ -73,6 +63,8 @@ const FilterSidebar = (props) => {
                         setPriceContainerActive={setPriceContainerActive}
                         filters={filters}
                         setFilters={setFilters}
+                        //for search logic
+                        selectedCategory={selectedCategory}
                     />
                 </>
                 <>

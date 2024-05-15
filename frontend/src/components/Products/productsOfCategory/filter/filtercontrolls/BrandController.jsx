@@ -3,12 +3,15 @@ import { useSelector } from "react-redux";
 import ClearBrand from "./clearFiltes/smallScreen/ClearBrand";
 
 const BrandController = (props) => {
-    const { brandFilter, setBrandFilter, setCategoryContainerActive, isBrandContainerActive, 
-        setBrandContainerActive, setRatingContainerActive, setPriceContainerActive, filters, setFilters 
+    const { brandFilter, setBrandFilter, setCategoryContainerActive, isBrandContainerActive,
+        setBrandContainerActive, setRatingContainerActive, setPriceContainerActive, filters, setFilters,
+        selectedCategory
     } = props;
 
     const products = useSelector((state) => state.categoryProducts.products);
     // console.log(products);
+    const searchProducts = useSelector(state => state.categoryProducts.searchProducts);
+    // console.log(searchProducts);
 
     //This for (all screen)---->
     const handleBrandFilters = (brand) => {
@@ -43,6 +46,28 @@ const BrandController = (props) => {
                 uniqeBrands.push(product.brand);
             }
         });
+    } else if (searchProducts) {
+        if(!selectedCategory) {
+            searchProducts[0].forEach(product => {
+                if(!uniqeBrands.includes(product.brand)) {
+                    uniqeBrands.push(product.brand);
+                }
+            })
+        } else {
+            searchProducts.some(productArray => {
+                if(productArray[0].category === selectedCategory) {
+                    productArray.forEach(product => {
+                        if(!uniqeBrands.includes(product.brand)) {
+                            uniqeBrands.push(product.brand);
+                        }
+                    })
+                    
+                    // Terminate the outer loop
+                    return true;
+                }
+                return false;
+            })
+        }
     }
 
     return (

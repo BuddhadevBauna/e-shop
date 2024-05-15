@@ -3,7 +3,7 @@ import "./AllProduct.css";
 import { useDispatch, useSelector } from "react-redux";
 import { setAllProducts } from "../../../redux/reducers/allProductSlice";
 import axios from "axios";
-import { removeProductOfCategory } from "../../../redux/reducers/productsOfCategorySlice";
+import { removeCategoryProducts } from "../../../redux/reducers/productsOfCategorySlice";
 import Product from "../product/Product";
 import { removeProductDetails } from "../../../redux/reducers/productDetailsSlice";
 
@@ -14,7 +14,7 @@ const AllProduct = () => {
     const dispatch = useDispatch();
     useEffect(() => {
         const fetchProducts = async () => {
-            dispatch(removeProductOfCategory());
+            dispatch(removeCategoryProducts());
             dispatch(removeProductDetails());
             try {
                 const response = await axios("https://dummyjson.com/products");

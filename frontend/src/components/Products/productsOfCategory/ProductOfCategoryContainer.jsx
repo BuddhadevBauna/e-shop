@@ -1,14 +1,21 @@
 import React, { useEffect, useState } from "react";
 import "./ProductsOfCategoryContainer.css";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useLocation, useParams } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { removeProductOfCategory, setProductsOfCategory } from "../../../redux/reducers/productsOfCategorySlice";
+import {   setProductsOfCategory, setProductsOfCategorySearch, removeCategoryProducts } from "../../../redux/reducers/productsOfCategorySlice";
 import { removeProductDetails } from "../../../redux/reducers/productDetailsSlice";
 import ProductsOfCategory from "./ProductOfCategory";
 
 
 const ProductsOfCategoryContainer = () => {
+    // This for search filter
+    const location = useLocation();
+    const { searchCategories, searchProducts } = location.state || {};
+    // console.log(searchCategories);
+    // console.log(searchProducts);
+
+
     //Apply filters, This for (all screen)--->
     const [filters, setFilters] = useState({
         brand: [],
@@ -38,7 +45,7 @@ const ProductsOfCategoryContainer = () => {
     useEffect(() => {
         const fetchProductsOfCategory = async () => {
             dispatch(removeProductDetails());
-            dispatch(removeProductOfCategory());
+            dispatch(removeCategoryProducts());
             //Clear Filters
             setBrandFilter([]);
             setRatingFilter([]);
@@ -59,18 +66,22 @@ const ProductsOfCategoryContainer = () => {
             }
 
             try {
-                const response = await axios(
-                    `https://dummyjson.com/products/category/${particularCategory}`
-                );
-                // console.log(response);
-                // console.log(response.data);
-                dispatch(setProductsOfCategory(response.data));
+                if(!searchProducts) {
+                    const response = await axios(
+                        `https://dummyjson.com/products/category/${particularCategory}`
+                    );
+                    // console.log(response);
+                    // console.log(response.data.products);
+                    dispatch(setProductsOfCategory(response.data.products));
+                } else {
+                    dispatch(setProductsOfCategorySearch(searchProducts));
+                }
             } catch (error) {
                 console.log(error);
             }
         };
         fetchProductsOfCategory();
-    }, [particularCategory, dispatch]);
+    }, [particularCategory, dispatch, searchProducts]);
 
     return (
         <ProductsOfCategory
@@ -90,6 +101,8 @@ const ProductsOfCategoryContainer = () => {
             setRatingContainerActive={setRatingContainerActive}
             isPriceContainerActive={isPriceContainerActive}
             setPriceContainerActive={setPriceContainerActive}
+            //for search logic
+            searchCategories={searchCategories}
         />
     )
 }

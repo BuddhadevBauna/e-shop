@@ -80,11 +80,15 @@
     max-height: 10rem;
 }
 .product-category-container .product-details {
-    width: 70%;
+    width: calc(70% - 1rem);
     display: flex;
     gap: 1.5rem;
 }
+.product-category-container .product-details .icon {
+    width: 1rem;
+}
 .product-details-container {
+    width: calc(100% - 1rem);
     display: flex;
     gap: 1.5rem;
 }
@@ -268,4 +272,15 @@
     .product-description p {
         font-size: 0.9rem;
     }
+}
+
+/* search filter */
+.seacrch-category {
+    font-size: 1rem !important;
+    text-transform: capitalize;
+    cursor: pointer;
+    color: blueviolet !important;
+}
+.seacrch-category span:hover {
+    color: red !important;
 }

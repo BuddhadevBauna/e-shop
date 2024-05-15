@@ -1,10 +1,20 @@
 import express from "express";
+import cors from "cors";
+import bodyParser from "body-parser";
 
 
+//Initialize express server
 const app = express();
 
-app.get('/', (req, res) => {
-    res.send("Hi");
+//Middleware
+app.use(cors());
+app.use(bodyParser.json());
+
+//Use routes
+
+
+app.get("/", (req, res) => {
+    res.send("Hello");
 })
 
 
